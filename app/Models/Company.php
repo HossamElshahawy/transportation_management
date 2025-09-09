@@ -21,4 +21,9 @@ class Company extends Model
     {
         return $this->hasMany(Vehicle::class);
     }
+
+    public function trips(): HasMany
+    {
+        return $this->hasMany(Trip::class);
+    }
 }
