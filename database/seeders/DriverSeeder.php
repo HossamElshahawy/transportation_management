@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Company;
+use App\Models\Driver;
 use Illuminate\Database\Seeder;
 
-class CompanySeeder extends Seeder
+class DriverSeeder extends Seeder
 {
     public function run(): void
     {
-        Company::factory()->count(10)->create();
+        Driver::factory()->count(5)->create();
     }
 }
