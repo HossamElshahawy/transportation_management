@@ -1,61 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# HyperSenderTest
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel-based transportation management demo that showcases a Filament Admin Panel with KPIs, availability management, and seeded sample data. The project includes widgets and pages to monitor drivers, vehicles, and trips in real time.
 
-## About Laravel
+## Features
+- Filament Admin Panel with a dashboard
+  - KPI Overview widget showing:
+    - Active trips now
+    - Available drivers and vehicles with availability percentage
+    - Completed trips this month with trend
+    - Total resources (drivers, vehicles) and total trips
+- Manager Availability page to review current availability (Filament page)
+- Eloquent models for Companies, Drivers, Vehicles, Trips
+- Database factories and seeders for realistic demo data
+- Caching for dashboard KPIs to reduce DB load
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tech Stack
+- PHP (Laravel Framework)
+- Filament Admin
+- MySQL/MariaDB (or any DB supported by Laravel)
+- Composer, Node.js (for asset build if needed)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Prerequisites
+- PHP 8.1+
+- Composer 2+
+- MySQL/MariaDB (or compatible DB)
+- Node.js 18+ (optional; for building assets)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Getting Started
+1. Clone the repository
+   - git clone <your-repo-url>
+   - cd HyperSenderTest
+2. Install dependencies
+   - composer install
+   - npm install (optional)
+3. Environment setup
+   - Copy .env.example to .env
+   - Set DB_ credentials (host, database, username, password)
+   - Optionally set APP_URL (e.g., http://localhost)
+4. Generate app key
+   - php artisan key:generate
+5. Migrate and seed
+   - php artisan migrate --seed
+6. Storage symlink (for media, if needed)
+   - php artisan storage:link
+7. Serve the application
+   - php artisan serve
+   - Visit http://127.0.0.1:8000 (or your local domain)
 
-## Learning Laravel
+## Accessing Filament Admin
+- Default Filament URL: /admin
+- If no default admin user is created, create one:
+  - php artisan make:filament-user
+  - Follow the prompts to set email and password
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Configuration Notes
+- Caching: KPIs are cached for 60 seconds in app/Filament/Widgets/KpiOverview.php
+- Timezone/locale: Configure in config/app.php and .env (APP_LOCALE, APP_TIMEZONE)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Running Tests
+- php artisan test
+- Or vendor\bin\phpunit
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Project Highlights
+- app\Filament\Widgets\KpiOverview.php — dashboard KPIs and charts
+- app\Filament\Pages\ManagerAvailability.php — availability page
+- app\Providers\Filament\AdminPanelProvider.php — Filament panel configuration
+- database\factories\*.php — factories for seed data
+- database\seeders\DatabaseSeeder.php — demo data seeding
 
-## Laravel Sponsors
+## Common Artisan Commands
+- php artisan migrate:fresh --seed — reset and reseed database
+- php artisan cache:clear && php artisan config:clear — clear caches
+- php artisan optimize — optimize framework caches
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Troubleshooting
+- Filament assets not loading: run php artisan optimize:clear and ensure APP_URL is correct
 
 ## License
+This project is open-sourced software licensed under the MIT license.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Acknowledgements
+- Laravel Framework — https://laravel.com
+- Filament Admin — https://filamentphp.com
