@@ -5,22 +5,20 @@ namespace Database\Factories;
 use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Driver>
- */
 class DriverFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
+        $arabicNames = [
+            'أحمد محمد', 'محمد أحمد', 'علي حسن', 'حسن علي', 'محمود سيد',
+            'سيد محمود', 'عبد الله أحمد', 'يوسف محمد', 'إبراهيم علي', 'عمر حسن',
+            'خالد محمد', 'طارق أحمد', 'وائل سيد', 'هشام علي', 'كريم محمود'
+        ];
+
         return [
             'company_id' => Company::factory(),
-            'name' => fake()->name(),
-            'phone' => fake()->phoneNumber(),
+            'name' => fake()->randomElement($arabicNames),
+            'phone' => '01' . fake()->randomElement([0, 1, 2, 5]) . fake()->numerify('########'),
         ];
     }
 }
